@@ -19,7 +19,7 @@
 		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": true,
 		"importHelpers": true,
-		"outDir": "./build",
+		"outDir": "./build"
 	},
 	"exclude": ["build", "node_modules", "**/node_modules/**/*", "**/dist/**/*"],
 	"include": ["src/**/*.ts", "test/**/*.ts", "src/simulation.ts"],
