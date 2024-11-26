@@ -6,6 +6,7 @@ import { toString as uint8ArrayToString } from "uint8arrays/to-string";
 import { createLibp2p } from "..";
 import { plaintext } from "../connection-encrypter";
 import { mplex } from "../mplex";
+import { ping } from "../protocol-ping";
 import { tcp } from "../transport-tcp";
 import { webSockets } from "../transport-websockets";
 
@@ -21,6 +22,9 @@ const createNode = async (transports, addresses: any = []) => {
 		transports,
 		connectionEncrypters: [plaintext()],
 		streamMuxers: [mplex({ maxInboundStreams: 256 })],
+		services: {
+			ping: ping(),
+		},
 	});
 
 	return node;
@@ -53,6 +57,7 @@ async function main() {
 	node1.handle("/print", print);
 	node2.handle("/print", print);
 	node3.handle("/print", print);
+	node2.handle("/ping", print);
 
 	await node1.peerStore.patch(node2.peerId, {
 		multiaddrs: node2.getMultiaddrs(),
@@ -78,6 +83,10 @@ async function main() {
 	} catch (err) {
 		console.log("node 3 failed to dial to node 1 with:", err.message);
 	}
+
+	const rtt = await node1.services.ping.ping(node2.peerId);
+
+	console.info(rtt);
 }
 
 main();

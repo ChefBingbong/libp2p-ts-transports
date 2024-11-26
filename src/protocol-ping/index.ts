@@ -25,7 +25,7 @@
 import type { AbortOptions, ComponentLogger, PeerId } from "@libp2p/interface";
 import type { ConnectionManager, Registrar } from "@libp2p/interface-internal";
 import type { Multiaddr } from "@multiformats/multiaddr";
-import { PingService as PingServiceClass } from "./ping.js";
+import { PingService as PingServiceClass } from "./ping";
 
 export interface PingService {
 	ping(peer: PeerId | Multiaddr | Multiaddr[], options?: AbortOptions): Promise<number>;

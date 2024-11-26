@@ -13,8 +13,8 @@ import {
 	PROTOCOL_PREFIX,
 	PROTOCOL_VERSION,
 	TIMEOUT,
-} from "./constants.js";
-import type { PingServiceComponents, PingServiceInit, PingService as PingServiceInterface } from "./index.js";
+} from "./constants";
+import type { PingServiceComponents, PingServiceInit, PingService as PingServiceInterface } from "./index";
 
 export class PingService implements Startable, PingServiceInterface {
 	public readonly protocol: string;
@@ -153,7 +153,7 @@ export class PingService implements Startable, PingServiceInterface {
 				throw new ProtocolError(`Received wrong ping ack after ${ms}ms`);
 			}
 
-			this.log("ping %p complete in %dms", connection.remotePeer, ms);
+			console.log("ping %p complete in %dms", connection.remotePeer, ms);
 
 			return ms;
 		} catch (err: any) {
