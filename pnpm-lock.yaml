@@ -32,6 +32,9 @@ importers:
       '@multiformats/dns':
         specifier: ^1.0.6
         version: 1.0.6
+      '@multiformats/mafmt':
+        specifier: ^12.1.6
+        version: 12.1.6
       '@multiformats/multiaddr':
         specifier: ^12.2.3
         version: 12.3.3
@@ -101,6 +104,9 @@ importers:
       race-signal:
         specifier: ^1.0.2
         version: 1.1.0
+      stream-to-it:
+        specifier: ^1.0.1
+        version: 1.0.1
       ts-node:
         specifier: ^10.9.1
         version: 10.9.2(@types/node@18.19.65)(typescript@5.7.2)
@@ -462,6 +468,9 @@ packages:
 
   '@multiformats/dns@1.0.6':
     resolution: {integrity: sha512-nt/5UqjMPtyvkG9BQYdJ4GfLK3nMqGpFZOzf4hAmIa0sJh2LlS9YKXZ4FgwBDsaHvzZqR/rUFIywIc7pkHNNuw==}
+
+  '@multiformats/mafmt@12.1.6':
+    resolution: {integrity: sha512-tlJRfL21X+AKn9b5i5VnaTD6bNttpSpcqwKVmDmSHLwxoz97fAHaepqFOk/l1fIu94nImIXneNbhsJx/RQNIww==}
 
   '@multiformats/multiaddr-matcher@1.6.0':
     resolution: {integrity: sha512-E77lLvQR+50kTAfvjV3g4wr9qCu77Z+6yT0s1hgfh8B4sAXZ8u/YdQJGhjgstgW1kmGy7BXPppROKYijqQsesQ==}
@@ -1200,6 +1209,9 @@ packages:
     resolution: {integrity: sha512-XlkWvfIm6RmsWtNJx+uqtKLS8eqFbxUg0ZzLXqY0caEy9l7hruX8IpiDnjsLavoBgqCCR71TqWO8MaXYheJ3RQ==}
     engines: {node: '>=10'}
 
+  stream-to-it@1.0.1:
+    resolution: {integrity: sha512-AqHYAYPHcmvMrcLNgncE/q0Aj/ajP6A4qGhxP6EVn7K3YTNs0bJpJyk57wc2Heb7MUL64jurvmnmui8D9kjZgA==}
+
   string-argv@0.3.2:
     resolution: {integrity: sha512-aqD2Q0144Z+/RqG52NeHEkZauTAUWJO8c6yTftGJKO3Tja5tUgIfmIl6kExvhtxSDP7fXB6DvzkfMpCd/F3G+Q==}
     engines: {node: '>=0.6.19'}
@@ -1614,6 +1626,10 @@ snapshots:
       p-queue: 8.0.1
       progress-events: 1.0.1
       uint8arrays: 5.1.0
+
+  '@multiformats/mafmt@12.1.6':
+    dependencies:
+      '@multiformats/multiaddr': 12.3.3
 
   '@multiformats/multiaddr-matcher@1.6.0':
     dependencies:
@@ -2368,6 +2384,10 @@ snapshots:
   stack-utils@2.0.6:
     dependencies:
       escape-string-regexp: 2.0.0
+
+  stream-to-it@1.0.1:
+    dependencies:
+      it-stream-types: 2.0.2
 
   string-argv@0.3.2: {}
 
