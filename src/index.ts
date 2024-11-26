@@ -15,18 +15,18 @@
  */
 
 import { generateKeyPair } from '@libp2p/crypto/keys'
-import type { ComponentLogger, ConnectionEncrypter, ConnectionGater, ConnectionProtector, Libp2p, Metrics, NodeInfo, PrivateKey, ServiceMap, StreamMuxerFactory, Transport } from '@libp2p/interface'
-import { peerIdFromPrivateKey } from '@libp2p/peer-id'
+import type { ComponentLogger, ConnectionEncrypter, ConnectionGater, ConnectionProtector, ContentRouting, Libp2p, Metrics, NodeInfo, PeerDiscovery, PeerRouting, PrivateKey, ServiceMap, StreamMuxerFactory, Transport } from '@libp2p/interface'
+import type { PersistentPeerStoreInit } from '@libp2p/peer-store'
+import type { DNS } from '@multiformats/dns'
+import type { Datastore } from 'interface-datastore'
 import type { AddressFilter, AddressManagerInit } from './address-manager.js'
 import type { Components } from './components.js'
 import { validateConfig } from './config.js'
 import type { ConnectionManagerInit } from './connection-manager/index.js'
 import type { ConnectionMonitorInit } from './connection-monitor.js'
 import { Libp2p as Libp2pClass } from './libp2p.js'
+import { peerIdFromPrivateKey } from './peer-id/index.js'
 import type { TransportManagerInit } from './transport-manager.js'
-// import type { PersistentPeerStoreInit } from '@libp2p/peer-store'
-import type { DNS } from '@multiformats/dns'
-// import type { Datastore } from 'interface-datastore'
 
 export type ServiceFactoryMap<T extends ServiceMap = ServiceMap> = {
   [Property in keyof T]: (components: Components & T) => T[Property]
@@ -77,17 +77,17 @@ export interface Libp2pInit<T extends ServiceMap = ServiceMap> {
    */
   transportManager?: TransportManagerInit
 
-//   /**
-//    * An optional datastore to persist peer information, DHT records, etc.
-//    *
-//    * An in-memory datastore will be used if one is not provided.
-//    */
-//   datastore?: Datastore
+  /**
+   * An optional datastore to persist peer information, DHT records, etc.
+   *
+   * An in-memory datastore will be used if one is not provided.
+   */
+  datastore?: Datastore
 
-//   /**
-//    * libp2p PeerStore configuration
-//    */
-//   peerStore?: PersistentPeerStoreInit
+  /**
+   * libp2p PeerStore configuration
+   */
+  peerStore?: PersistentPeerStoreInit
 
   /**
    * Transports are low-level communication channels
@@ -107,20 +107,20 @@ export interface Libp2pInit<T extends ServiceMap = ServiceMap> {
    */
   connectionEncrypters?: Array<(components: Components) => ConnectionEncrypter>
 
-//   /**
-//    * Peer discovery mechanisms allow finding peers on the network
-//    */
-//   peerDiscovery?: Array<(components: Components) => PeerDiscovery>
+  /**
+   * Peer discovery mechanisms allow finding peers on the network
+   */
+  peerDiscovery?: Array<(components: Components) => PeerDiscovery>
 
-//   /**
-//    * Peer routers provide implementations for peer routing queries
-//    */
-//   peerRouters?: Array<(components: Components) => PeerRouting>
+  /**
+   * Peer routers provide implementations for peer routing queries
+   */
+  peerRouters?: Array<(components: Components) => PeerRouting>
 
-//   /**
-//    * Content routers provide implementations for content routing queries
-//    */
-//   contentRouters?: Array<(components: Components) => ContentRouting>
+  /**
+   * Content routers provide implementations for content routing queries
+   */
+  contentRouters?: Array<(components: Components) => ContentRouting>
 
   /**
    * A Metrics implementation can be supplied to collect metrics on this node
