@@ -16,6 +16,13 @@ await pipe(
 )
 ```
 */
+
+//TO-D0
+//1 implement ll javascript example sin seperate sacripts and play aqround with diff libp2p setvices
+// then check out how lodestar implementts libp2p for connection monitoring and replicate this locally
+// try implement a local simple peer handler from diff termonals like u do in MPC BTC bridge
+// then after you get sucessful connection handling/poinging workig locally. strip the lib to learn how
+// the multiplexiong anmd upgrading work
 import { pipe } from "it-pipe";
 import { Uint8ArrayList } from "uint8arraylist";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
