@@ -19,9 +19,9 @@
 		"allowSyntheticDefaultImports": true,
 		"resolveJsonModule": true,
 		"importHelpers": true,
-		"outDir": "./build"
+		"outDir": "./dist"
 	},
-	"exclude": ["build", "node_modules", "**/node_modules/**/*", "**/dist/**/*"],
+	// "exclude": ["dist", "node_modules", "**/node_modules/**/*", "**/dist/**/*"],
 	"include": ["src/**/*.ts", "test/**/*.ts", "src/simulation.ts"],
 	"compileOnSave": true,
 	"typeAcquisition": {
