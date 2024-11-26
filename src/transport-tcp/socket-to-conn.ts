@@ -1,10 +1,10 @@
 import type { Socket } from "net";
-import { InvalidParametersError, TimeoutError } from "@libp2p/interface";
 import type { ComponentLogger, CounterGroup, MultiaddrConnection } from "@libp2p/interface";
+import { InvalidParametersError, TimeoutError } from "@libp2p/interface";
 import { ipPortToMultiaddr as toMultiaddr } from "@libp2p/utils/ip-port-to-multiaddr";
 import type { AbortOptions, Multiaddr } from "@multiformats/multiaddr";
-import pDefer from "p-defer";
 import type { DeferredPromise } from "p-defer";
+import pDefer from "p-defer";
 import { raceEvent } from "race-event";
 import { duplex } from "stream-to-it";
 import { CLOSE_TIMEOUT, SOCKET_TIMEOUT } from "./constants.js";

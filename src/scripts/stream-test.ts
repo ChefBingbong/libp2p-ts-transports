@@ -75,9 +75,9 @@ async function main() {
 	printAddrs(node2, "2");
 	printAddrs(node3, "3");
 
-	node1.handle("/print", print);
-	node2.handle("/print", print);
-	node3.handle("/print", print);
+	// node1.handle("/print", print);
+	// node2.handle("/print", print);
+	// node3.handle("/print", print);
 	// node2.handle("/echo/1.0.0", print);
 
 	await node1.peerStore.patch(node2.peerId, {
@@ -90,20 +90,20 @@ async function main() {
 		multiaddrs: node1.getMultiaddrs(),
 	});
 
-	// node 1 (TCP) dials to node 2 (TCP+WebSockets)
-	const stream = await node1.dialProtocol(node2.peerId, "/print");
-	await pipe([uint8ArrayFromString("node 1 dialed to node 2 successfully")], stream);
+	// // node 1 (TCP) dials to node 2 (TCP+WebSockets)
+	// const stream = await node1.dialProtocol(node2.peerId, "/print");
+	// await pipe([uint8ArrayFromString("node 1 dialed to node 2 successfully")], stream);
 
 	// node 2 (TCP+WebSockets) dials to node 3 (WebSockets)
 	const stream2 = await node2.dialProtocol(node3.peerId, "/echo/1.0.0");
 	await pipe([uint8ArrayFromString("node 2 dialed to node 3 successfully")], stream2);
 
 	// node 3 (listening WebSockets) can dial node 1 (TCP)
-	try {
-		await node3.dialProtocol(node1.peerId, "/print");
-	} catch (err) {
-		console.log("node 3 failed to dial to node 1 with:", err.message);
-	}
+	// try {
+	// 	await node3.dialProtocol(node1.peerId, "/print");
+	// } catch (err) {
+	// 	console.log("node 3 failed to dial to node 1 with:", err.message);
+	// }
 
 	const rtt = await node1.services.ping.ping(node2.peerId);
 
