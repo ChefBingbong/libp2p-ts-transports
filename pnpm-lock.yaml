@@ -38,6 +38,9 @@ importers:
       '@multiformats/multiaddr-matcher':
         specifier: ^1.6.0
         version: 1.6.0
+      '@multiformats/multiaddr-to-uri':
+        specifier: ^11.0.0
+        version: 11.0.0
       any-signal:
         specifier: ^4.1.1
         version: 4.1.1
@@ -74,6 +77,9 @@ importers:
       it-stream-types:
         specifier: ^2.0.1
         version: 2.0.2
+      it-ws:
+        specifier: ^6.1.5
+        version: 6.1.5
       merge-options:
         specifier: ^3.0.4
         version: 3.0.4
@@ -113,6 +119,9 @@ importers:
       uint8arrays:
         specifier: ^5.1.0
         version: 5.1.0
+      wherearewe:
+        specifier: ^2.0.1
+        version: 2.0.1
       winston:
         specifier: ^3.9.0
         version: 3.17.0
@@ -457,6 +466,9 @@ packages:
   '@multiformats/multiaddr-matcher@1.6.0':
     resolution: {integrity: sha512-E77lLvQR+50kTAfvjV3g4wr9qCu77Z+6yT0s1hgfh8B4sAXZ8u/YdQJGhjgstgW1kmGy7BXPppROKYijqQsesQ==}
 
+  '@multiformats/multiaddr-to-uri@11.0.0':
+    resolution: {integrity: sha512-9RNmlIGwZbBLsHekT50dbt4o4u8Iciw9kGjv+WHiGxQdsJ6xKKjU1+C0Vbas6RilMbaVOAOnEyfNcXbUmTkLxQ==}
+
   '@multiformats/multiaddr@12.3.3':
     resolution: {integrity: sha512-3POIUN7myk8JbO8oi/FEyZoLQW2XMhwM/uB7hG5Zl1PgdXJR8UTH9QdQEp1jM358kd3yn+vtS4fFJdqdRk+O7A==}
 
@@ -538,6 +550,9 @@ packages:
 
   '@types/triple-beam@1.3.5':
     resolution: {integrity: sha512-6WaYesThRMCl19iryMYP7/x2OVgCtbIVflDGFpWnb9irXI3UjYE4AzmYuiUKY1AJstGijoY+MgUszMgRxIYTYw==}
+
+  '@types/ws@8.5.13':
+    resolution: {integrity: sha512-osM/gWBTPKgHV8XkTunnegTRIsvF6owmf5w+JtAfOw472dptdm0dlGv4xCt6GwQRcC2XVOvvRE/0bAoQcL2QkA==}
 
   '@types/yargs-parser@21.0.3':
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
@@ -723,6 +738,9 @@ packages:
     resolution: {integrity: sha512-UpzcLCXolUWcNu5HtVMHYdXJjArjsF9C0aNnquZYY4uW/Vu0miy5YoWvbV345HauVvcAUnpRuhMMcqTcGOY2+w==}
     engines: {node: '>=8'}
 
+  event-iterator@2.0.0:
+    resolution: {integrity: sha512-KGft0ldl31BZVV//jj+IAIGCxkvvUkkON+ScH6zfoX+l+omX6001ggyRSpI0Io2Hlro0ThXotswCtfzS8UkIiQ==}
+
   eventemitter3@5.0.1:
     resolution: {integrity: sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==}
 
@@ -809,6 +827,9 @@ packages:
 
   is-arrayish@0.3.2:
     resolution: {integrity: sha512-eVRqCvVlZbuw3GrM63ovNSNAeA1K16kaR/LRY/92w0zxQ5/1YzwblUX652i4Xs9RwAGjW9d9y6X88t8OaAJfWQ==}
+
+  is-electron@2.2.2:
+    resolution: {integrity: sha512-FO/Rhvz5tuw4MCWkpMzHFKWD2LsfHzIb7i6MdPYZ/KW7AlxawyLkqdy+jPZP1WubqEADE3O4FUENlJHDfQASRg==}
 
   is-fullwidth-code-point@4.0.0:
     resolution: {integrity: sha512-O4L094N2/dZ7xqVdrXhh9r1KODPJpFms8B5sGdJLPy664AgvXsreZUyCQQNItZRDlYug4xStLjNp/sz3HvBowQ==}
@@ -904,6 +925,10 @@ packages:
 
   it-take@3.0.6:
     resolution: {integrity: sha512-uqw3MRzf9to1SOLxaureGa73lK8k8ZB/asOApTAkvrzUqCznGtKNgPFH7uYIWlt4UuWq/hU6I+U4Fm5xpjN8Vg==}
+
+  it-ws@6.1.5:
+    resolution: {integrity: sha512-uWjMtpy5HqhSd/LlrlP3fhYrr7rUfJFFMABv0F5d6n13Q+0glhZthwUKpEAVhDrXY95Tb1RB5lLqqef+QbVNaw==}
+    engines: {node: '>=16.0.0', npm: '>=7.0.0'}
 
   jest-diff@29.7.0:
     resolution: {integrity: sha512-LMIgiIrhigmPrs03JHpxUh2yISK3vLFPkAodPeo0+BuF7wA2FoQbkEg1u8gBYBThncu7e1oEDUfIXVuTqLRUjw==}
@@ -1269,6 +1294,10 @@ packages:
   weald@1.0.4:
     resolution: {integrity: sha512-+kYTuHonJBwmFhP1Z4YQK/dGi3jAnJGCYhyODFpHK73rbxnp9lnZQj7a2m+WVgn8fXr5bJaxUpF6l8qZpPeNWQ==}
 
+  wherearewe@2.0.1:
+    resolution: {integrity: sha512-XUguZbDxCA2wBn2LoFtcEhXL6AXo+hVjGonwhSTTTU9SzbWG8Xu3onNIpzf9j/mYUcJQ0f+m37SzG77G851uFw==}
+    engines: {node: '>=16.0.0', npm: '>=7.0.0'}
+
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
     engines: {node: '>= 8'}
@@ -1285,6 +1314,18 @@ packages:
   wrap-ansi@9.0.0:
     resolution: {integrity: sha512-G8ura3S+3Z2G+mkgNRq8dqaFZAuxfsxpBB8OCTGRTCtp+l/v9nbFNmCUP1BZMts3G1142MsZfn6eeUKrr4PD1Q==}
     engines: {node: '>=18'}
+
+  ws@8.18.0:
+    resolution: {integrity: sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
 
   yaml@2.5.1:
     resolution: {integrity: sha512-bLQOjaX/ADgQ20isPJRvF0iRUHIxVhYvr53Of7wGcWlO2jvtUlH5m87DsmulFVxRpNLOnI4tB6p/oh8D7kpn9Q==}
@@ -1580,6 +1621,10 @@ snapshots:
       '@multiformats/multiaddr': 12.3.3
       multiformats: 13.3.1
 
+  '@multiformats/multiaddr-to-uri@11.0.0':
+    dependencies:
+      '@multiformats/multiaddr': 12.3.3
+
   '@multiformats/multiaddr@12.3.3':
     dependencies:
       '@chainsafe/is-ip': 2.0.2
@@ -1661,6 +1706,10 @@ snapshots:
   '@types/stack-utils@2.0.3': {}
 
   '@types/triple-beam@1.3.5': {}
+
+  '@types/ws@8.5.13':
+    dependencies:
+      '@types/node': 18.19.65
 
   '@types/yargs-parser@21.0.3': {}
 
@@ -1851,6 +1900,8 @@ snapshots:
 
   escape-string-regexp@2.0.0: {}
 
+  event-iterator@2.0.0: {}
+
   eventemitter3@5.0.1: {}
 
   execa@8.0.1:
@@ -1924,6 +1975,8 @@ snapshots:
   interface-store@6.0.2: {}
 
   is-arrayish@0.3.2: {}
+
+  is-electron@2.2.2: {}
 
   is-fullwidth-code-point@4.0.0: {}
 
@@ -2024,6 +2077,17 @@ snapshots:
   it-stream-types@2.0.2: {}
 
   it-take@3.0.6: {}
+
+  it-ws@6.1.5:
+    dependencies:
+      '@types/ws': 8.5.13
+      event-iterator: 2.0.0
+      it-stream-types: 2.0.2
+      uint8arrays: 5.1.0
+      ws: 8.18.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
 
   jest-diff@29.7.0:
     dependencies:
@@ -2394,6 +2458,10 @@ snapshots:
       ms: 3.0.0-canary.1
       supports-color: 9.4.0
 
+  wherearewe@2.0.1:
+    dependencies:
+      is-electron: 2.2.2
+
   which@2.0.2:
     dependencies:
       isexe: 2.0.0
@@ -2423,6 +2491,8 @@ snapshots:
       ansi-styles: 6.2.1
       string-width: 7.2.0
       strip-ansi: 7.1.0
+
+  ws@8.18.0: {}
 
   yaml@2.5.1: {}
 

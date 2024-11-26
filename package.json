@@ -29,6 +29,7 @@
 		"@multiformats/dns": "^1.0.6",
 		"@multiformats/multiaddr": "^12.2.3",
 		"@multiformats/multiaddr-matcher": "^1.6.0",
+		"@multiformats/multiaddr-to-uri": "^11.0.0",
 		"any-signal": "^4.1.1",
 		"axios": "^1.7.7",
 		"datastore-core": "^10.0.0",
@@ -41,6 +42,7 @@
 		"it-pipe": "^3.0.1",
 		"it-pushable": "^3.2.3",
 		"it-stream-types": "^2.0.1",
+		"it-ws": "^6.1.5",
 		"merge-options": "^3.0.4",
 		"multiformats": "^13.1.0",
 		"p-defer": "^4.0.1",
@@ -54,6 +56,7 @@
 		"uint8-varint": "^2.0.4",
 		"uint8arraylist": "^2.4.8",
 		"uint8arrays": "^5.1.0",
+		"wherearewe": "^2.0.1",
 		"winston": "^3.9.0",
 		"zod": "^3.22.3"
 	},
