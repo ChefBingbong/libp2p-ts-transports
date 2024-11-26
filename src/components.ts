@@ -1,198 +1,222 @@
-import { serviceCapabilities, serviceDependencies } from '@libp2p/interface'
-import { isStartable, type Startable, type Libp2pEvents, type ComponentLogger, type NodeInfo, type ConnectionProtector, type ConnectionGater, type ContentRouting, type TypedEventTarget, type Metrics, type PeerId, type PeerRouting, type PeerStore, type PrivateKey, type Upgrader } from '@libp2p/interface'
-import { defaultLogger } from '@libp2p/logger'
-import { MissingServiceError, UnmetServiceDependenciesError } from './errors.js'
-import type { AddressManager, ConnectionManager, RandomWalk, Registrar, TransportManager } from '@libp2p/interface-internal'
-import type { DNS } from '@multiformats/dns'
-import type { Datastore } from 'interface-datastore'
+import {
+	type ComponentLogger,
+	type ConnectionGater,
+	type ConnectionProtector,
+	type ContentRouting,
+	type Libp2pEvents,
+	type Metrics,
+	type NodeInfo,
+	type PeerId,
+	type PeerRouting,
+	type PeerStore,
+	type PrivateKey,
+	type Startable,
+	type TypedEventTarget,
+	type Upgrader,
+	isStartable,
+	serviceCapabilities,
+	serviceDependencies,
+} from "@libp2p/interface";
+import type { AddressManager, ConnectionManager, RandomWalk, Registrar, TransportManager } from "@libp2p/interface-internal";
+import { defaultLogger } from "@libp2p/logger";
+import type { DNS } from "@multiformats/dns";
+import type { Datastore } from "interface-datastore";
+import { MissingServiceError, UnmetServiceDependenciesError } from "./errors.js";
 
 export interface Components extends Record<string, any>, Startable {
-  peerId: PeerId
-  privateKey: PrivateKey
-  nodeInfo: NodeInfo
-  logger: ComponentLogger
-  events: TypedEventTarget<Libp2pEvents>
-  addressManager: AddressManager
-  peerStore: PeerStore
-  upgrader: Upgrader
-  randomWalk: RandomWalk
-  registrar: Registrar
-  connectionManager: ConnectionManager
-  transportManager: TransportManager
-  connectionGater: ConnectionGater
-  contentRouting: ContentRouting
-  peerRouting: PeerRouting
-  datastore: Datastore
-  connectionProtector?: ConnectionProtector
-  metrics?: Metrics
-  dns?: DNS
+	peerId: PeerId;
+	privateKey: PrivateKey;
+	nodeInfo: NodeInfo;
+	logger: ComponentLogger;
+	events: TypedEventTarget<Libp2pEvents>;
+	addressManager: AddressManager;
+	peerStore: PeerStore;
+	upgrader: Upgrader;
+	randomWalk: RandomWalk;
+	registrar: Registrar;
+	connectionManager: ConnectionManager;
+	transportManager: TransportManager;
+	connectionGater: ConnectionGater;
+	contentRouting: ContentRouting;
+	peerRouting: PeerRouting;
+	datastore: Datastore;
+	connectionProtector?: ConnectionProtector;
+	metrics?: Metrics;
+	dns?: DNS;
 }
 
 export interface ComponentsInit {
-  peerId?: PeerId
-  privateKey?: PrivateKey
-  nodeInfo?: NodeInfo
-  logger?: ComponentLogger
-  events?: TypedEventTarget<Libp2pEvents>
-  addressManager?: AddressManager
-  peerStore?: PeerStore
-  upgrader?: Upgrader
-  randomWalk?: RandomWalk
-  metrics?: Metrics
-  registrar?: Registrar
-  connectionManager?: ConnectionManager
-  transportManager?: TransportManager
-  connectionGater?: ConnectionGater
-  contentRouting?: ContentRouting
-  peerRouting?: PeerRouting
-  datastore?: Datastore
-  connectionProtector?: ConnectionProtector
-  dns?: DNS
+	peerId?: PeerId;
+	privateKey?: PrivateKey;
+	nodeInfo?: NodeInfo;
+	logger?: ComponentLogger;
+	events?: TypedEventTarget<Libp2pEvents>;
+	addressManager?: AddressManager;
+	peerStore?: PeerStore;
+	upgrader?: Upgrader;
+	randomWalk?: RandomWalk;
+	metrics?: Metrics;
+	registrar?: Registrar;
+	connectionManager?: ConnectionManager;
+	transportManager?: TransportManager;
+	connectionGater?: ConnectionGater;
+	contentRouting?: ContentRouting;
+	peerRouting?: PeerRouting;
+	datastore?: Datastore;
+	connectionProtector?: ConnectionProtector;
+	dns?: DNS;
 }
 
 class DefaultComponents implements Startable {
-  public components: Record<string, any> = {}
-  private _started = false
+	public components: Record<string, any> = {};
+	private _started = false;
 
-  constructor (init: ComponentsInit = {}) {
-    this.components = {}
+	constructor(init: ComponentsInit = {}) {
+		this.components = {};
 
-    for (const [key, value] of Object.entries(init)) {
-      this.components[key] = value
-    }
+		for (const [key, value] of Object.entries(init)) {
+			this.components[key] = value;
+		}
 
-    if (this.components.logger == null) {
-      this.components.logger = defaultLogger()
-    }
-  }
+		if (this.components.logger == null) {
+			this.components.logger = defaultLogger();
+		}
+	}
 
-  isStarted (): boolean {
-    return this._started
-  }
+	isStarted(): boolean {
+		return this._started;
+	}
 
-  private async _invokeStartableMethod (methodName: 'beforeStart' | 'start' | 'afterStart' | 'beforeStop' | 'stop' | 'afterStop'): Promise<void> {
-    await Promise.all(
-      Object.values(this.components)
-        .filter(obj => isStartable(obj))
-        .map(async (startable: Startable) => {
-          await startable[methodName]?.()
-        })
-    )
-  }
+	private async _invokeStartableMethod(
+		methodName: "beforeStart" | "start" | "afterStart" | "beforeStop" | "stop" | "afterStop",
+	): Promise<void> {
+		await Promise.all(
+			Object.values(this.components)
+				.filter((obj) => isStartable(obj))
+				.map(async (startable: Startable) => {
+					await startable[methodName]?.();
+				}),
+		);
+	}
 
-  async beforeStart (): Promise<void> {
-    await this._invokeStartableMethod('beforeStart')
-  }
+	async beforeStart(): Promise<void> {
+		await this._invokeStartableMethod("beforeStart");
+	}
 
-  async start (): Promise<void> {
-    await this._invokeStartableMethod('start')
-    this._started = true
-  }
+	async start(): Promise<void> {
+		await this._invokeStartableMethod("start");
+		this._started = true;
+	}
 
-  async afterStart (): Promise<void> {
-    await this._invokeStartableMethod('afterStart')
-  }
+	async afterStart(): Promise<void> {
+		await this._invokeStartableMethod("afterStart");
+	}
 
-  async beforeStop (): Promise<void> {
-    await this._invokeStartableMethod('beforeStop')
-  }
+	async beforeStop(): Promise<void> {
+		await this._invokeStartableMethod("beforeStop");
+	}
 
-  async stop (): Promise<void> {
-    await this._invokeStartableMethod('stop')
-    this._started = false
-  }
+	async stop(): Promise<void> {
+		await this._invokeStartableMethod("stop");
+		this._started = false;
+	}
 
-  async afterStop (): Promise<void> {
-    await this._invokeStartableMethod('afterStop')
-  }
+	async afterStop(): Promise<void> {
+		await this._invokeStartableMethod("afterStop");
+	}
 }
 
-const OPTIONAL_SERVICES = [
-  'metrics',
-  'connectionProtector',
-  'dns'
-]
+const OPTIONAL_SERVICES = ["metrics", "connectionProtector", "dns"];
 
 const NON_SERVICE_PROPERTIES = [
-  'components',
-  'isStarted',
-  'beforeStart',
-  'start',
-  'afterStart',
-  'beforeStop',
-  'stop',
-  'afterStop',
-  'then',
-  '_invokeStartableMethod'
-]
+	"components",
+	"isStarted",
+	"beforeStart",
+	"start",
+	"afterStart",
+	"beforeStop",
+	"stop",
+	"afterStop",
+	"then",
+	"_invokeStartableMethod",
+];
 
-export function defaultComponents (init: ComponentsInit = {}): Components {
-  const components = new DefaultComponents(init)
-
-  const proxy = new Proxy(components, {
-    get (target, prop, receiver) {
-      if (typeof prop === 'string' && !NON_SERVICE_PROPERTIES.includes(prop)) {
-        const service = components.components[prop]
-
-        if (service == null && !OPTIONAL_SERVICES.includes(prop)) {
-          throw new MissingServiceError(`${prop} not set`)
-        }
-
-        return service
-      }
-
-      return Reflect.get(target, prop, receiver)
-    },
-
-    set (target, prop, value) {
-      if (typeof prop === 'string') {
-        components.components[prop] = value
-      } else {
-        Reflect.set(target, prop, value)
-      }
-
-      return true
-    }
-  })
-
-  // @ts-expect-error component keys are proxied
-  return proxy
+interface ConstrainBooleanParameters {
+	exact?: boolean;
+	ideal?: boolean;
 }
 
-export function checkServiceDependencies (components: Components): void {
-  const serviceCapabilities: Record<string, ConstrainBoolean> = {}
+type ConstrainBoolean = boolean | ConstrainBooleanParameters;
 
-  for (const service of Object.values(components.components)) {
-    for (const capability of getServiceCapabilities(service)) {
-      serviceCapabilities[capability] = true
-    }
-  }
+export function defaultComponents(init: ComponentsInit = {}): Components {
+	const components = new DefaultComponents(init);
 
-  for (const service of Object.values(components.components)) {
-    for (const capability of getServiceDependencies(service)) {
-      if (serviceCapabilities[capability] !== true) {
-        throw new UnmetServiceDependenciesError(`Service "${getServiceName(service)}" required capability "${capability}" but it was not provided by any component, you may need to add additional configuration when creating your node.`)
-      }
-    }
-  }
+	const proxy = new Proxy(components, {
+		get(target, prop, receiver) {
+			if (typeof prop === "string" && !NON_SERVICE_PROPERTIES.includes(prop)) {
+				const service = components.components[prop];
+
+				if (service == null && !OPTIONAL_SERVICES.includes(prop)) {
+					throw new MissingServiceError(`${prop} not set`);
+				}
+
+				return service;
+			}
+
+			return Reflect.get(target, prop, receiver);
+		},
+
+		set(target, prop, value) {
+			if (typeof prop === "string") {
+				components.components[prop] = value;
+			} else {
+				Reflect.set(target, prop, value);
+			}
+
+			return true;
+		},
+	});
+
+	// @ts-expect-error component keys are proxied
+	return proxy;
 }
 
-function getServiceCapabilities (service: any): string[] {
-  if (Array.isArray(service?.[serviceCapabilities])) {
-    return service[serviceCapabilities]
-  }
+export function checkServiceDependencies(components: Components): void {
+	const serviceCapabilities: Record<string, ConstrainBoolean> = {};
 
-  return []
+	for (const service of Object.values(components.components)) {
+		for (const capability of getServiceCapabilities(service)) {
+			serviceCapabilities[capability] = true;
+		}
+	}
+
+	for (const service of Object.values(components.components)) {
+		for (const capability of getServiceDependencies(service)) {
+			if (serviceCapabilities[capability] !== true) {
+				throw new UnmetServiceDependenciesError(
+					`Service "${getServiceName(service)}" required capability "${capability}" but it was not provided by any component, you may need to add additional configuration when creating your node.`,
+				);
+			}
+		}
+	}
 }
 
-function getServiceDependencies (service: any): string[] {
-  if (Array.isArray(service?.[serviceDependencies])) {
-    return service[serviceDependencies]
-  }
+function getServiceCapabilities(service: any): string[] {
+	if (Array.isArray(service?.[serviceCapabilities])) {
+		return service[serviceCapabilities];
+	}
 
-  return []
+	return [];
 }
 
-function getServiceName (service: any): string {
-  return service?.[Symbol.toStringTag] ?? service?.toString() ?? 'unknown'
+function getServiceDependencies(service: any): string[] {
+	if (Array.isArray(service?.[serviceDependencies])) {
+		return service[serviceDependencies];
+	}
+
+	return [];
+}
+
+function getServiceName(service: any): string {
+	return service?.[Symbol.toStringTag] ?? service?.toString() ?? "unknown";
 }

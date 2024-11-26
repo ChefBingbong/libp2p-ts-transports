@@ -26,9 +26,18 @@ importers:
       '@libp2p/peer-store':
         specifier: ^11.0.12
         version: 11.0.12
+      '@libp2p/utils':
+        specifier: ^6.2.1
+        version: 6.2.1
       '@multiformats/dns':
         specifier: ^1.0.6
         version: 1.0.6
+      '@multiformats/multiaddr':
+        specifier: ^12.2.3
+        version: 12.3.3
+      '@multiformats/multiaddr-matcher':
+        specifier: ^1.6.0
+        version: 1.6.0
       any-signal:
         specifier: ^4.1.1
         version: 4.1.1
@@ -47,15 +56,21 @@ importers:
       it-byte-stream:
         specifier: ^1.0.12
         version: 1.1.0
+      it-length-prefixed-stream:
+        specifier: ^1.2.0
+        version: 1.2.0
       it-merge:
         specifier: ^3.0.5
         version: 3.0.5
       it-parallel:
         specifier: ^3.0.7
         version: 3.0.8
-      keys:
-        specifier: link:@libp2p/crypto/keys
-        version: link:@libp2p/crypto/keys
+      it-pushable:
+        specifier: ^3.2.3
+        version: 3.2.3
+      it-stream-types:
+        specifier: ^2.0.1
+        version: 2.0.2
       merge-options:
         specifier: ^3.0.4
         version: 3.0.4
@@ -86,6 +101,12 @@ importers:
       tsx:
         specifier: ^4.19.2
         version: 4.19.2
+      uint8-varint:
+        specifier: ^2.0.4
+        version: 2.0.4
+      uint8arraylist:
+        specifier: ^2.4.8
+        version: 2.4.8
       uint8arrays:
         specifier: ^5.1.0
         version: 5.1.0
@@ -129,9 +150,6 @@ importers:
       it-pair:
         specifier: ^2.0.6
         version: 2.0.6
-      it-stream-types:
-        specifier: ^2.0.1
-        version: 2.0.2
       it-take:
         specifier: ^3.0.5
         version: 3.0.6
@@ -153,9 +171,6 @@ importers:
       typescript:
         specifier: ^5.1.3
         version: 5.7.2
-      uint8arraylist:
-        specifier: ^2.4.8
-        version: 2.4.8
 
 packages:
 
@@ -435,6 +450,9 @@ packages:
 
   '@multiformats/dns@1.0.6':
     resolution: {integrity: sha512-nt/5UqjMPtyvkG9BQYdJ4GfLK3nMqGpFZOzf4hAmIa0sJh2LlS9YKXZ4FgwBDsaHvzZqR/rUFIywIc7pkHNNuw==}
+
+  '@multiformats/multiaddr-matcher@1.6.0':
+    resolution: {integrity: sha512-E77lLvQR+50kTAfvjV3g4wr9qCu77Z+6yT0s1hgfh8B4sAXZ8u/YdQJGhjgstgW1kmGy7BXPppROKYijqQsesQ==}
 
   '@multiformats/multiaddr@12.3.3':
     resolution: {integrity: sha512-3POIUN7myk8JbO8oi/FEyZoLQW2XMhwM/uB7hG5Zl1PgdXJR8UTH9QdQEp1jM358kd3yn+vtS4fFJdqdRk+O7A==}
@@ -837,6 +855,9 @@ packages:
 
   it-foreach@2.1.1:
     resolution: {integrity: sha512-ID4Gxnavk/LVQLQESAQ9hR6dR63Ih6X+8VdxEktX8rpz2dCGAbZpey/eljTNbMfV2UKXHiu6UsneoNBZuac97g==}
+
+  it-length-prefixed-stream@1.2.0:
+    resolution: {integrity: sha512-vX7dzSl/2UMYYsAr0FQdPNVR5xYEETaeboZ+eXxNBjgARuvxnWA6OedW8lC5/J3ebMTC98JhA3eH76eTijUOsA==}
 
   it-length-prefixed@9.1.0:
     resolution: {integrity: sha512-kx2UTJuy7/lsT3QUzf50NjfxU1Z4P4wlvYp6YnR5Nc61P8XKfy+QtiJi1VLojA+Kea7vMbB4002rIij1Ol9hcw==}
@@ -1550,6 +1571,12 @@ snapshots:
       progress-events: 1.0.1
       uint8arrays: 5.1.0
 
+  '@multiformats/multiaddr-matcher@1.6.0':
+    dependencies:
+      '@chainsafe/is-ip': 2.0.2
+      '@multiformats/multiaddr': 12.3.3
+      multiformats: 13.3.1
+
   '@multiformats/multiaddr@12.3.3':
     dependencies:
       '@chainsafe/is-ip': 2.0.2
@@ -1932,6 +1959,13 @@ snapshots:
   it-foreach@2.1.1:
     dependencies:
       it-peekable: 3.0.5
+
+  it-length-prefixed-stream@1.2.0:
+    dependencies:
+      it-byte-stream: 1.1.0
+      it-stream-types: 2.0.2
+      uint8-varint: 2.0.4
+      uint8arraylist: 2.4.8
 
   it-length-prefixed@9.1.0:
     dependencies:
