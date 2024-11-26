@@ -1,11 +1,29 @@
 /* eslint-disable no-console */
 
+/*
+**After**
+```js
+const pipe = require('it-pipe')
+const { protocol, stream } = await libp2p.dialProtocol(peerInfo, '/echo/1.0.0')
+await pipe(
+  ['hey'],
+  stream,
+  async function (source) {
+    for await (const data of source) {
+      console.log('received echo:', data.toString())
+    }
+  }
+)
+```
+*/
 import { pipe } from "it-pipe";
+import { Uint8ArrayList } from "uint8arraylist";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 import { toString as uint8ArrayToString } from "uint8arrays/to-string";
 import { createLibp2p } from "..";
 import { plaintext } from "../connection-encrypter";
 import { mplex } from "../mplex";
+import { echo } from "../protocol-echo";
 import { ping } from "../protocol-ping";
 import { tcp } from "../transport-tcp";
 import { webSockets } from "../transport-websockets";
@@ -24,6 +42,7 @@ const createNode = async (transports, addresses: any = []) => {
 		streamMuxers: [mplex({ maxInboundStreams: 256 })],
 		services: {
 			ping: ping(),
+			echo: echo(),
 		},
 	});
 
@@ -43,6 +62,8 @@ function print({ stream }) {
 	});
 }
 
+// async function handleEcho ()
+
 async function main() {
 	const [node1, node2, node3] = await Promise.all([
 		createNode([tcp()], "/ip4/0.0.0.0/tcp/0"),
@@ -57,7 +78,7 @@ async function main() {
 	node1.handle("/print", print);
 	node2.handle("/print", print);
 	node3.handle("/print", print);
-	node2.handle("/ping", print);
+	// node2.handle("/echo/1.0.0", print);
 
 	await node1.peerStore.patch(node2.peerId, {
 		multiaddrs: node2.getMultiaddrs(),
@@ -74,7 +95,7 @@ async function main() {
 	await pipe([uint8ArrayFromString("node 1 dialed to node 2 successfully")], stream);
 
 	// node 2 (TCP+WebSockets) dials to node 3 (WebSockets)
-	const stream2 = await node2.dialProtocol(node3.peerId, "/print");
+	const stream2 = await node2.dialProtocol(node3.peerId, "/echo/1.0.0");
 	await pipe([uint8ArrayFromString("node 2 dialed to node 3 successfully")], stream2);
 
 	// node 3 (listening WebSockets) can dial node 1 (TCP)
@@ -87,6 +108,18 @@ async function main() {
 	const rtt = await node1.services.ping.ping(node2.peerId);
 
 	console.info(rtt);
+
+	let response = "";
+	const decoder = new TextDecoder("utf-8");
+
+	for await (const chunk of stream2.source) {
+		const buffer = chunk instanceof Uint8ArrayList ? chunk.subarray() : chunk;
+		response += decoder.decode(buffer, { stream: true });
+
+		console.log("Response:", decoder.decode(buffer, { stream: true }));
+	}
+
+	console.log("Received response from nodeId2:", response);
 }
 
 main();
