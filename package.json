@@ -7,7 +7,7 @@
 		"build": "tsc",
 		"clean": "rm -rf build",
 		"start": "NODE_ENV=production tsc && node ./build/index.js",
-		"start:dev": "NODE_ENV=development tsx ./src/scripts/stream-test.ts",
+		"start:dev": "NODE_ENV=development tsx ./scripts/stream-test.ts",
 		"format:check": "biome format .",
 		"format:write": "biome format . --write",
 		"format:check:staged": "lint-staged",

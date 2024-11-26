@@ -20,13 +20,13 @@ import { pipe } from "it-pipe";
 import { Uint8ArrayList } from "uint8arraylist";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 import { toString as uint8ArrayToString } from "uint8arrays/to-string";
-import { createLibp2p } from "..";
-import { plaintext } from "../connection-encrypter";
-import { mplex } from "../mplex";
-import { echo } from "../protocol-echo";
-import { ping } from "../protocol-ping";
-import { tcp } from "../transport-tcp";
-import { webSockets } from "../transport-websockets";
+import { createLibp2p } from "../src";
+import { plaintext } from "../src/connection-encrypter";
+import { mplex } from "../src/mplex";
+import { echo } from "../src/protocol-echo";
+import { ping } from "../src/protocol-ping";
+import { tcp } from "../src/transport-tcp";
+import { webSockets } from "../src/transport-websockets";
 
 const createNode = async (transports, addresses: any = []) => {
 	if (!Array.isArray(addresses)) {
